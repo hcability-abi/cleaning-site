@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご依頼の流れ | 株式会社アビリティ</title>
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --accent: #22d3ee;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light-gray: #f1f5f9;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 20px rgba(0,0,0,0.08);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--primary); }
+    nav a.active { color: var(--primary); font-weight: 900; }
+
+    .btn-contact {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      box-shadow: 0 4px 15px rgba(14,165,233,0.3);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14,165,233,0.4) !important;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      padding-top: 70px;
+      background: linear-gradient(160deg, #e0f2fe 0%, #f0f9ff 40%, #ecfeff 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(14,165,233,0.1), transparent 70%);
+      border-radius: 50%;
+    }
+    .page-hero-inner {
+      position: relative; z-index: 1;
+      padding: 60px 5% 60px;
+    }
+    .section-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(34,211,238,0.1));
+      color: var(--primary-dark);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid rgba(14,165,233,0.2);
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .page-hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-hero p {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 1rem;
+      color: var(--gray);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ===== FLOW STEPS ===== */
+    .flow-section {
+      padding: 90px 5%;
+      background: white;
+    }
+    .flow-steps-vertical {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-step-block {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 28px;
+      position: relative;
+    }
+    .flow-step-block:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 39px;
+      top: 80px;
+      bottom: -10px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      opacity: 0.3;
+    }
+    .flow-step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 48px;
+    }
+    .flow-num-circle {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: white;
+      box-shadow: 0 6px 20px rgba(14,165,233,0.3);
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .flow-step-icon-sm {
+      font-size: 1.6rem;
+      margin-top: 12px;
+    }
+    .flow-step-right {
+      background: var(--light-gray);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      border-left: 4px solid var(--primary);
+      transition: box-shadow 0.3s;
+    }
+    .flow-step-right:hover {
+      box-shadow: 0 12px 36px rgba(14,165,233,0.1);
+    }
+    .flow-step-right h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .flow-step-right p {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .flow-step-detail {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .flow-step-detail li {
+      font-size: 0.87rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flow-step-detail li::before {
+      content: '▶';
+      color: var(--primary);
+      font-size: 0.6rem;
+    }
+    .flow-badge {
+      display: inline-block;
+      background: rgba(14,165,233,0.1);
+      color: var(--primary-dark);
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(14,165,233,0.2);
+      margin-bottom: 14px;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-section {
+      padding: 90px 5%;
+      background: var(--light-gray);
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 28px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-q-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .faq-question h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      flex: 1;
+    }
+    .faq-toggle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: var(--primary);
+      transition: transform 0.3s;
+      font-weight: 700;
+    }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+    .faq-answer {
+      display: none;
+      padding: 0 28px 22px 76px;
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 100px 5%;
+      background: linear-gradient(135deg, var(--primary-dark), #0369a1, var(--primary));
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(34,211,238,0.1) 0%, transparent 50%);
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .cta p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      background: white;
+      color: var(--primary-dark);
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .btn-outline-white {
+      background: transparent;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+    }
+    .cta-tel {
+      margin-top: 32px;
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+    }
+    .cta-tel a {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 5% 32px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo { color: white; margin-bottom: 16px; display: flex; }
+    .footer-col h4 {
+      color: white; font-size: 0.9rem; font-weight: 700; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .flow-step-block { grid-template-columns: 56px 1fr; gap: 16px; }
+      .flow-step-right { padding: 24px 20px; }
+      .faq-answer { padding-left: 28px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<script id="site-script">
+const SITE = {
+  "会社名": "株式会社アビリティ",
+  "電話番号": "078-381-9986",
+  "営業時間": "9:00〜19:00",
+  "郵便番号": "〒653-0055",
+  "住所": "兵庫県神戸市長田区浪松町2-1-12",
+  "キャッチコピー": "プロの技術で輝く清潔な空間へ",
+  "説明文": "エアコン・水回り・換気扇など、日々のお掃除では届かない汚れもプロが徹底的にクリーニング。お見積もりは無料です。",
+  "サービス": [
+    {
+      "アイコン": "❄️",
+      "名前": "エアコンクリーニング",
+      "説明": "フィルターやカバーなど分解し、高圧洗浄。カビ・ニオイ・アレルギーの原因を徹底除去します。",
+      "料金": "お掃除機能無し ¥9,900/台<br>お掃除機能付き ¥13,200/台<span class=\"price-note\">※パッケージエアコン（業務用壁掛けエアコン）は、<br>お掃除機能付きの代金となります。</span>"
+    },
+    {
+      "アイコン": "🚿",
+      "名前": "浴室クリーニング",
+      "説明": "カビ・水垢・石鹸カスをプロ用洗剤と技術で除去。気持ちよく入浴できる清潔なお風呂に。",
+      "料金": "¥11,000〜/1箇所"
+    },
+    {
+      "アイコン": "💨",
+      "名前": "レンジフード（換気扇）洗浄",
+      "説明": "油汚れやベタつきが蓄積したレンジフードを分解洗浄。徹底クリーニングです。",
+      "料金": "¥11,000〜/1箇所"
+    },
+    {
+      "アイコン": "🍳",
+      "名前": "キッチンクリーニング",
+      "説明": "頑固な油汚れ・焦げをすっきり除去。コンロ・水周りなど、徹底クリーニングです。",
+      "料金": "¥13,200〜/1箇所"
+    },
+    {
+      "アイコン": "🚽",
+      "名前": "トイレクリーニング",
+      "説明": "便器の黒ずみ・尿石・臭いを徹底除去。見えない部分まで丁寧に清掃します。",
+      "料金": "¥8,800〜/1箇所"
+    },
+    {
+      "アイコン": "🏠",
+      "名前": "引越し前後クリーニング",
+      "説明": "入居前・退去前の徹底清掃。原状回復・新居の準備をプロにお任せください。",
+      "料金": "¥14,300〜/1部屋"
+    }
+  ],
+  "口コミ": [
+    {
+      "星": "★★★★★",
+      "名前": "T.Kさん（40代・女性）",
+      "エリア": "兵庫県 / エアコンクリーニング",
+      "本文": "エアコンからカビ臭がしていたのですが、クリーニング後は全くニオイがなくなりました！スタッフの方も礼儀正しく、部屋を丁寧に扱ってくださって安心でした。"
+    },
+    {
+      "星": "★★★★★",
+      "名前": "M.Sさん（30代・男性）",
+      "エリア": "兵庫県  / 引越しクリーニング",
+      "本文": "引越し前の退去クリーニングをお願いしました。入居時と同じくらいきれいになって、敷金も全額返ってきました！料金もリーズナブルで大満足です。"
+    },
+    {
+      "星": "★★★★★",
+      "名前": "Y.Nさん（50代・女性）",
+      "エリア": "兵庫県 / レンジフード洗浄",
+      "本文": "レンジフードがひどい油汚れでずっと気になっていましたが、分解洗浄してもらって新品のようになりました！作業も丁寧で、においもなくなって大満足です。"
+    }
+  ]
+};
+(function() {
+  try { const s = localStorage.getItem('ABILITY_SITE'); if (s) Object.assign(SITE, JSON.parse(s)); } catch(e) {}
+})();
+</script>
+
+<!-- HEADER -->
+<header>
+  <a href="cleaning.html" class="logo">
+    <div class="logo-icon">✨</div>
+    <span id="logo-name">株式会社アビリティ</span>
+  </a>
+  <nav>
+    <a href="cleaning.html">ホーム</a>
+    <a href="services.html">サービス</a>
+    <a href="about.html">選ばれる理由</a>
+    <a href="flow.html" class="active">ご依頼の流れ</a>
+    <a href="voice.html">お客様の声</a>
+    <a href="contact.html" class="btn-contact">無料見積もり</a>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-tag">FLOW</div>
+    <h1>ご依頼の<span class="highlight">流れ</span></h1>
+    <p>お問い合わせから施工完了まで、わかりやすくご案内します。<br>最短即日対応・お見積もり無料です。</p>
+  </div>
+</section>
+
+<!-- FLOW STEPS -->
+<section class="flow-section">
+  <div class="section-header">
+    <div class="section-tag">STEP</div>
+    <h2>4ステップで完了</h2>
+    <p>初めての方も安心。丁寧にサポートいたします。</p>
+  </div>
+  <div class="flow-steps-vertical">
+
+    <div class="flow-step-block">
+      <div class="flow-step-left">
+        <div class="flow-num-circle">1</div>
+        <div class="flow-step-icon-sm">📱</div>
+      </div>
+      <div class="flow-step-right">
+        <div class="flow-badge">STEP 01</div>
+        <h3>お問い合わせ</h3>
+        <p>電話・LINE・Webフォームからお気軽にご連絡ください。担当スタッフが丁寧にヒアリングを行い、ご要望を詳しくお聞きします。お問い合わせはいつでも無料・しつこい営業は一切行いません。</p>
+        <ul class="flow-step-detail">
+          <li>電話受付：9:00〜20:00（年中無休）</li>
+          <li>LINE：24時間受付、翌営業日以内に返信</li>
+          <li>Webフォーム：送信後24時間以内にご返信</li>
+          <li>ご連絡いただいた当日にご訪問も可能（状況による）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow-step-block">
+      <div class="flow-step-left">
+        <div class="flow-num-circle">2</div>
+        <div class="flow-step-icon-sm">📋</div>
+      </div>
+      <div class="flow-step-right">
+        <div class="flow-badge">STEP 02</div>
+        <h3>無料お見積もり・日程調整</h3>
+        <p>ご要望・お部屋の状況・ご希望のサービス内容をもとに、明確な料金をご提示します。お見積もりは完全無料。ご納得いただいた上で日程を確定しますので、無理に進めることはありません。</p>
+        <ul class="flow-step-detail">
+          <li>電話・LINEで概算見積もりをその場でご提示</li>
+          <li>現地見積もり（無料訪問）も承ります</li>
+          <li>見積もり後のキャンセルも一切無料</li>
+          <li>土日祝・早朝・夜間も日程調整可能</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow-step-block">
+      <div class="flow-step-left">
+        <div class="flow-num-circle">3</div>
+        <div class="flow-step-icon-sm">🧹</div>
+      </div>
+      <div class="flow-step-right">
+        <div class="flow-badge">STEP 03</div>
+        <h3>施工当日</h3>
+        <p>担当スタッフが時間通りにご訪問し、まずご挨拶と作業内容の最終確認を行います。養生をしっかり行った後、プロの道具と洗剤で丁寧に作業いたします。作業中はなるべくお部屋の外でお過ごしいただけます。</p>
+        <ul class="flow-step-detail">
+          <li>スタッフ到着時に身分証・作業内容の確認</li>
+          <li>家具・床面の養生を徹底</li>
+          <li>プロ仕様の機材・業務用洗剤を使用</li>
+          <li>作業中は換気・安全管理を徹底</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow-step-block">
+      <div class="flow-step-left">
+        <div class="flow-num-circle">4</div>
+        <div class="flow-step-icon-sm">✨</div>
+      </div>
+      <div class="flow-step-right">
+        <div class="flow-badge">STEP 04</div>
+        <h3>仕上がり確認・お支払い</h3>
+        <p>施工完了後、お客様立ち会いのもと仕上がりをご確認いただきます。ご満足いただけた後にお支払いをお願いしております。万が一気になる点があれば、その場で追加作業（無料対応）いたします。</p>
+        <ul class="flow-step-detail">
+          <li>お客様とともに全箇所の仕上がりを確認</li>
+          <li>不満があればその場で無料再施工</li>
+          <li>現金・クレジットカード・PayPay対応</li>
+          <li>作業完了報告書・領収書を発行</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-header">
+    <div class="section-tag">FAQ</div>
+    <h2>よくあるご質問</h2>
+    <p>お客様からよくいただくご質問にお答えします。</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>作業中は在宅が必要ですか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">基本的には作業開始時と終了時のみご在宅いただければ問題ありません。作業中は別の部屋でお過ごしいただくか、外出も可能です。鍵の預かりについては、事前にご相談ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>当日キャンセルはできますか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">前日までのキャンセルは無料です。当日キャンセルの場合はキャンセル料（作業料の30%）が発生する場合がございます。緊急の場合はまずお電話でご連絡ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>作業中に物が壊れた場合はどうなりますか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">万が一スタッフの過失で破損・汚損が発生した場合は、加入している損害賠償保険にて対応いたします。作業前に家具・家電の状態を確認し、記録を行っておりますのでご安心ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>ペットや小さな子供がいても大丈夫ですか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">はい、安全性の高い低刺激・人体に優しい洗剤を使用しています。ただし作業中はペット・お子様を別の部屋に移動していただくようお願いしています。アレルギー等のご心配がある場合は事前にお知らせください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>複数箇所まとめて依頼すると安くなりますか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">はい、2箇所以上同時にご依頼いただくとセット割引が適用されます。例えばエアコン＋浴室の組み合わせ、浴室＋トイレ＋キッチンのパックなど、お気軽にご相談ください。お客様に合ったプランをご提案します。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>マンションの管理規約に引っかかりませんか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">一般的なハウスクリーニングは管理規約に抵触しません。ただし一部の作業（高圧洗浄の際の排水など）は事前に管理組合への確認が必要な場合があります。不安な場合はお問い合わせの際にご相談ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>支払い方法を教えてください。</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">現金・主要クレジットカード（VISA、Mastercard、JCB等）・PayPay・LINE Payに対応しています。法人様向けの請求書払いも承っておりますので、お問い合わせください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-icon">Q</div>
+        <h4>見積もりと実際の料金が変わることはありますか？</h4>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">見積もり提示後に追加料金が発生することは原則ありません。ただし現地確認なしの電話見積もりの場合、実際の汚れ具合が著しく異なる場合は作業前に改めてご説明・再見積もりをいたします。その際もご納得いただいてから作業を開始します。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2>今すぐ無料で相談する</h2>
+    <p>まずはお気軽にご連絡ください。即日対応も可能です。</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="btn-white">📋 無料で見積もりを依頼</a>
+      <a href="https://line.me" class="btn-outline-white">💬 LINEで相談する</a>
+    </div>
+    <div class="cta-tel">
+      <div style="margin-bottom:8px;font-size:0.85rem;" id="cta-hours-text">お電話でのご相談はこちら（受付 9:00〜20:00）</div>
+      <a id="cta-tel-link" href="tel:078-381-9986">078-381-9986</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="cleaning.html" class="logo">
+          <div class="logo-icon">✨</div>
+          <span id="footer-brand-name" style="color:white;font-weight:800;margin-left:10px;">株式会社アビリティ</span>
+        </a>
+        <p style="margin-top:16px;font-size:0.85rem;line-height:1.8;color:rgba(255,255,255,0.7);">プロの技術と丁寧なサービスで、お客様のお家を輝かせます。</p>
+        <p id="footer-address" style="margin-top:12px;font-size:0.85rem;line-height:1.8;color:rgba(255,255,255,0.7);">〒000-0000 東京都○○区○○1-2-3<br>TEL: 078-381-9986<br>営業時間: 9:00〜20:00（年中無休）</p>
+      </div>
+      <div class="footer-col">
+        <h4>サービス</h4>
+        <ul id="footer-services"></ul>
+      </div>
+      <div class="footer-col">
+        <h4>会社情報</h4>
+        <ul>
+          <li><a href="about.html">会社概要</a></li>
+          <li><a href="about.html">選ばれる理由</a></li>
+          <li><a href="voice.html">お客様の声</a></li>
+          <li><a href="flow.html">ご依頼の流れ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>サポート</h4>
+        <ul>
+          <li><a href="flow.html#faq">よくある質問</a></li>
+          <li><a href="services.html">料金表</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footer-copyright">© 2026 株式会社アビリティ All Rights Reserved.</span>
+      <span>Powered by Claude Design</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+document.getElementById('logo-name').textContent = SITE.会社名;
+document.getElementById('footer-brand-name').textContent = SITE.会社名;
+document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${SITE.会社名} All Rights Reserved.`;
+document.getElementById('footer-address').innerHTML = `${SITE.郵便番号} ${SITE.住所}<br>TEL: ${SITE.電話番号}<br>営業時間: ${SITE.営業時間}`;
+document.getElementById('footer-services').innerHTML = SITE.サービス.map(s => `<li><a href="services.html">${s.名前}</a></li>`).join('');
+document.getElementById('cta-hours-text').textContent = `お電話でのご相談はこちら（受付 ${SITE.営業時間}）`;
+document.getElementById('cta-tel-link').textContent = SITE.電話番号;
+document.getElementById('cta-tel-link').href = `tel:${SITE.電話番号}`;
+</script>
+
+</body>
+</html>
